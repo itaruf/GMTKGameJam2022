@@ -10,8 +10,8 @@ public class MiniGame : MonoBehaviour
     public float currentChrono = 0;
 
     // Actions
-    public Action _onStart;
-    public Action _onEnd;
+   /* public Action _onStart;
+    public Action _onEnd;*/
 
     void Awake()
     {
@@ -25,7 +25,7 @@ public class MiniGame : MonoBehaviour
 
     IEnumerator StartTimer()
     {
-        _onStart?.Invoke();
+        Event.current.OnStartMiniGame();
 
         float time = Time.time;
         while (Time.time - time < timer)
@@ -34,6 +34,6 @@ public class MiniGame : MonoBehaviour
             yield return null;
         }
 
-        _onEnd?.Invoke();
+        Event.current.OnEndMiniGame();
     }
 }

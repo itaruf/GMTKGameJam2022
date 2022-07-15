@@ -448,6 +448,36 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &736607098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736607099}
+  m_Layer: 0
+  m_Name: ---UI---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736607099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736607098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &978492726
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +526,7 @@ GameObject:
   - component: {fileID: 1038813795}
   m_Layer: 0
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Foreground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1136,8 +1166,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 0}
   _rb: {fileID: 1260846591}
+  _inputAction: {fileID: 1260846595}
   _move: {fileID: -274600882714156879, guid: 35438019c3f435e4b9a40035c70a744e, type: 3}
-  _ms: 10
+  _jump: {fileID: -6728526906891249130, guid: 35438019c3f435e4b9a40035c70a744e, type: 3}
+  _ms: 5
+  _jumpForce: 20
 --- !u!50 &1260846591
 Rigidbody2D:
   serializedVersion: 4
@@ -1387,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 2
+  currentChrono: 0
 --- !u!1 &1882197744
 GameObject:
   m_ObjectHideFlags: 0

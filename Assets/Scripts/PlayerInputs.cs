@@ -25,6 +25,14 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""caa2637e-0843-49c1-aeb9-207ff685692e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -38,39 +46,6 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""bba5343b-b242-4d24-a686-6ae04199d6a2"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""17cca427-8b92-45aa-ad25-138142da1168"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""c43265f3-e4e5-4a11-9850-ad10ed15c1f7"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -104,6 +79,17 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6382830-cf6a-43f2-ad73-0222a3f01426"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -113,6 +99,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         // Inputs
         m_Inputs = asset.FindActionMap("Inputs", throwIfNotFound: true);
         m_Inputs_Move = m_Inputs.FindAction("Move", throwIfNotFound: true);
+        m_Inputs_Jump = m_Inputs.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +150,13 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Inputs;
     private IInputsActions m_InputsActionsCallbackInterface;
     private readonly InputAction m_Inputs_Move;
+    private readonly InputAction m_Inputs_Jump;
     public struct InputsActions
     {
         private @PlayerInputs m_Wrapper;
         public InputsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Inputs_Move;
+        public InputAction @Jump => m_Wrapper.m_Inputs_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Inputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +169,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
+                @Jump.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_InputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -187,6 +179,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -194,5 +189,6 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     public interface IInputsActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
