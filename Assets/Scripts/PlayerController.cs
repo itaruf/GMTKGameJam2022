@@ -12,11 +12,18 @@ public class PlayerController : MonoBehaviour
 
     // Inputs
     [Header("Input")]
+    [SerializeField] PlayerInput _inputAction = null;
     [SerializeField] InputActionReference _move = null;
+    [SerializeField] InputActionReference _jump = null;
 
     // Movement
     [Header("Movement")]
     [SerializeField] float _ms = 2;
+    [SerializeField] float _jumpForce = 5;
+    Vector2 moveValue = new Vector2(0, 0);
+
+    private bool _isJumping = false;
+
     public Vector2 Direction { get; private set; }
     public void PrepareDirection(Vector2 v) => Direction = v.normalized;
     Coroutine MovementTracking { get; set; }
@@ -31,38 +38,74 @@ public class PlayerController : MonoBehaviour
 
         _move.action.started += MoveInput;
         _move.action.canceled += MoveCanceled;
+
+        _jump.action.performed += JumpInput;
+        /*_jump.action.performed += MoveCanceled;*/
+        _jump.action.canceled += JumpCanceled;
+    }
+
+    private void JumpCanceled(InputAction.CallbackContext obj)
+    {
+        /*jumpForce = 0;*/
+    }
+
+    private void JumpInput(InputAction.CallbackContext obj)
+
+    {   if (_isJumping)
+            return;
+
+        _isJumping = true;
+        _rb.AddForce((Vector2.up * _jumpForce), ForceMode2D.Impulse);
     }
 
     private void OnDestroy()
     {
         _move.action.started -= MoveInput;
         _move.action.canceled -= MoveCanceled;
+
+        _jump.action.performed -= JumpInput;
+        _jump.action.performed -= MoveCanceled;
     }
 
     void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + (Direction * _ms) * Time.fixedDeltaTime);
+        /*if (MovementTracking != null)
+            _rb.MovePosition(_rb.position + (Direction * _ms) * Time.fixedDeltaTime);*/
+
+        Move();
     }
 
     private void MoveInput(InputAction.CallbackContext obj)
     {
-        if (MovementTracking != null)
-            return;
+        /*   if (MovementTracking != null)
+               return;
 
-        MovementTracking = StartCoroutine(MovementTrackingRoutine());
-        IEnumerator MovementTrackingRoutine()
-        {
-            while (true)
-            {
-                PrepareDirection(obj.ReadValue<Vector2>());
-                _animatorController.FlipX(obj.ReadValue<Vector2>());
-                yield return null;
-            }
-        }
+           MovementTracking = StartCoroutine(MovementTrackingRoutine());
+           IEnumerator MovementTrackingRoutine()
+           {
+               while (true)
+               {
+                   PrepareDirection(obj.ReadValue<Vector2>());
+                   _animatorController.FlipX(obj.ReadValue<Vector2>());
+                   yield return null;
+
+                   _rb.MovePosition(_rb.position + (Direction * _ms) * Time.fixedDeltaTime);
+               }
+           }*/
+
+        moveValue = obj.ReadValue<Vector2>();
+        _animatorController.FlipX(obj.ReadValue<Vector2>());
+    }
+
+    private void Move()
+    {
+        transform.Translate(moveValue * Time.fixedDeltaTime * _ms);
     }
 
     public void MoveCanceled(InputAction.CallbackContext obj)
     {
+        moveValue = new Vector2(0, 0);
+
         if (MovementTracking == null)
             return;
 
@@ -70,4 +113,11 @@ public class PlayerController : MonoBehaviour
         MovementTracking = null;
         PrepareDirection(Vector2.zero);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Foreground"))
+            _isJumping = false;
+    }
+
 }
