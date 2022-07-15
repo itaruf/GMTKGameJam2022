@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CalculGame : MiniGame
 {
-    // Start is called before the first frame update
+    [SerializeField] CalculGameConfig _gameConfig = null;
     void Start()
     {
         
