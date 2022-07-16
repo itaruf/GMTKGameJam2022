@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
-    public SpriteRenderer _sprite = null;
+    public SpriteRenderer _sprite;
+    public Animator _animator;
 
     void Awake()
     {
-        if (!_sprite)
-            TryGetComponent(out _sprite);
+       /* if (!_sprite)
+            TryGetComponent(out _sprite);*/
     }
 
     public void FlipX(Vector2 direction)

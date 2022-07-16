@@ -6,20 +6,20 @@ using UnityEngine;
 public class MiniGame : MonoBehaviour
 {
     [Header("Timer")]
-
     public float startTimer = 1;
     public float gameTimer = 2;
     public float endTimer = 1;
 
+
+    [Header("Chrono")]
     public float currentChrono = 0;
+    [SerializeField] ChatBox _chronoText = null;
 
-    // Actions
-   /* public Action _onStart;
-    public Action _onEnd;*/
-
-    void Awake()
+    public void Awake()
     {
-        
+        /*_chronoText._textMesh.enabled = false;*/
+        _chronoText._textMesh.text = gameTimer.ToString();
+        /*Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };*/
     }
 
     void FixedUpdate()
@@ -51,6 +51,7 @@ public class MiniGame : MonoBehaviour
         while (Time.time - time < gameTimer)
         {
             currentChrono = Mathf.Round(Time.time - time);
+            _chronoText._textMesh.text = Mathf.Round(gameTimer - currentChrono).ToString();
             yield return null;
         }
 

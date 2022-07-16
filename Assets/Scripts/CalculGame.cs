@@ -23,6 +23,8 @@ public class CalculGame : MiniGame
 
     void Awake()
     {
+        base.Awake();
+
         _text._textMesh.enabled = false;
         Event.current._onStartMiniGame += () => { _text._textMesh.enabled = true; };
 

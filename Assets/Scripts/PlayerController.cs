@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
         moveValue = obj.ReadValue<Vector2>();
         _animatorController.FlipX(obj.ReadValue<Vector2>());
+        _animatorController._animator.SetBool(Animator.StringToHash("IsMoving"), true);
     }
 
     private void Move()
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
     public void MoveCanceled(InputAction.CallbackContext obj)
     {
         moveValue = new Vector2(0, 0);
+        _animatorController._animator.SetBool(Animator.StringToHash("IsMoving"), false);
 
         if (MovementTracking == null)
             return;
