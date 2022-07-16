@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerInput _inputAction = null;
     [SerializeField] InputActionReference _move = null;
     [SerializeField] InputActionReference _jump = null;
+    [SerializeField] InputActionReference _rolldice = null;
 
     // Movement
     [Header("Movement")]
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     Vector2 moveValue = new Vector2(0, 0);
 
     private bool _isJumping = false;
+    private bool _canRollDice = false;
 
     public Vector2 Direction { get; private set; }
     public void PrepareDirection(Vector2 v) => Direction = v.normalized;
@@ -30,6 +32,9 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Event.current._onRollDiceStarted += () => { _canRollDice = true; };
+        Event.current._onRollDiceEnded += () => { _canRollDice = false; };
+
         if (!_rb)
             TryGetComponent(out _rb);
 
@@ -40,8 +45,14 @@ public class PlayerController : MonoBehaviour
         _move.action.canceled += MoveCanceled;
 
         _jump.action.performed += JumpInput;
-        /*_jump.action.performed += MoveCanceled;*/
         _jump.action.canceled += JumpCanceled;
+
+        /*_rolldice.action.started += RollDiceInput;*/
+    }
+
+    private void RollDiceInput(InputAction.CallbackContext obj)
+    {
+        _animatorController._animator.SetTrigger(Animator.StringToHash("RollDice"));
     }
 
     private void JumpCanceled(InputAction.CallbackContext obj)
@@ -65,6 +76,9 @@ public class PlayerController : MonoBehaviour
 
         _jump.action.performed -= JumpInput;
         _jump.action.performed -= MoveCanceled;
+
+        _rolldice.action.started -= RollDiceInput;
+
     }
 
     void FixedUpdate()

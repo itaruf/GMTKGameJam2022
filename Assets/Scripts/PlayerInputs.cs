@@ -33,6 +33,14 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RollDice"",
+                    ""type"": ""Button"",
+                    ""id"": ""123679d1-497b-4fb0-9ec6-7d85feb49caf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -90,6 +98,17 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57450009-e18a-4a5e-bd88-a73adc7d8587"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RollDice"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -100,6 +119,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         m_Inputs = asset.FindActionMap("Inputs", throwIfNotFound: true);
         m_Inputs_Move = m_Inputs.FindAction("Move", throwIfNotFound: true);
         m_Inputs_Jump = m_Inputs.FindAction("Jump", throwIfNotFound: true);
+        m_Inputs_RollDice = m_Inputs.FindAction("RollDice", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -151,12 +171,14 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     private IInputsActions m_InputsActionsCallbackInterface;
     private readonly InputAction m_Inputs_Move;
     private readonly InputAction m_Inputs_Jump;
+    private readonly InputAction m_Inputs_RollDice;
     public struct InputsActions
     {
         private @PlayerInputs m_Wrapper;
         public InputsActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Inputs_Move;
         public InputAction @Jump => m_Wrapper.m_Inputs_Jump;
+        public InputAction @RollDice => m_Wrapper.m_Inputs_RollDice;
         public InputActionMap Get() { return m_Wrapper.m_Inputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -172,6 +194,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnJump;
+                @RollDice.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
+                @RollDice.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
+                @RollDice.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
             }
             m_Wrapper.m_InputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -182,6 +207,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @RollDice.started += instance.OnRollDice;
+                @RollDice.performed += instance.OnRollDice;
+                @RollDice.canceled += instance.OnRollDice;
             }
         }
     }
@@ -190,5 +218,6 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRollDice(InputAction.CallbackContext context);
     }
 }

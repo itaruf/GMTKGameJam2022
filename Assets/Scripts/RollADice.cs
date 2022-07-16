@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class RollADice : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
+    {
+    }
+
+    void FixedUpdate()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartDice()
     {
-        
+        Event.current.OnStartRollDice();
     }
 }

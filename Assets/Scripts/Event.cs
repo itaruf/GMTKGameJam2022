@@ -11,6 +11,9 @@ public class Event : MonoBehaviour
     public event Action _onStartMiniGame;
     public event Action _onEndMiniGame;
 
+    public event Action _onRollDiceStarted;
+    public event Action _onRollDiceEnded;
+
     private void Awake()
     {
         current = this;
@@ -29,5 +32,15 @@ public class Event : MonoBehaviour
     public void OnEndMiniGame()
     {
         _onEndMiniGame?.Invoke();
+    }
+
+    public void OnStartRollDice()
+    {
+        _onRollDiceStarted?.Invoke();
+    }
+
+    public void OnEndRollDice()
+    {
+        _onRollDiceEnded?.Invoke();
     }
 }
