@@ -41,6 +41,14 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""431dfc27-14cb-4be2-b7a5-46b911f7058b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -109,6 +117,17 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""action"": ""RollDice"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""674e91ce-aabc-4da7-96c7-b4bc1fed78bb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -120,6 +139,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         m_Inputs_Move = m_Inputs.FindAction("Move", throwIfNotFound: true);
         m_Inputs_Jump = m_Inputs.FindAction("Jump", throwIfNotFound: true);
         m_Inputs_RollDice = m_Inputs.FindAction("RollDice", throwIfNotFound: true);
+        m_Inputs_Start = m_Inputs.FindAction("Start", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,6 +192,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Inputs_Move;
     private readonly InputAction m_Inputs_Jump;
     private readonly InputAction m_Inputs_RollDice;
+    private readonly InputAction m_Inputs_Start;
     public struct InputsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -179,6 +200,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Inputs_Move;
         public InputAction @Jump => m_Wrapper.m_Inputs_Jump;
         public InputAction @RollDice => m_Wrapper.m_Inputs_RollDice;
+        public InputAction @Start => m_Wrapper.m_Inputs_Start;
         public InputActionMap Get() { return m_Wrapper.m_Inputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +219,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @RollDice.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
                 @RollDice.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
                 @RollDice.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnRollDice;
+                @Start.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
+                @Start.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
+                @Start.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
             }
             m_Wrapper.m_InputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -210,6 +235,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @RollDice.started += instance.OnRollDice;
                 @RollDice.performed += instance.OnRollDice;
                 @RollDice.canceled += instance.OnRollDice;
+                @Start.started += instance.OnStart;
+                @Start.performed += instance.OnStart;
+                @Start.canceled += instance.OnStart;
             }
         }
     }
@@ -219,5 +247,6 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRollDice(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
 }
