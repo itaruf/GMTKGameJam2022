@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public void PrepareDirection(Vector2 v) => Direction = v.normalized;
     Coroutine MovementTracking { get; set; }
 
+    [SerializeField] Dice _dice = null;
+
     void Awake()
     {
         Event.current._onRollDiceStarted += () => { _canRollDice = true; };
@@ -47,12 +49,21 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed += JumpInput;
         _jump.action.canceled += JumpCanceled;
 
-        /*_rolldice.action.started += RollDiceInput;*/
+        _rolldice.action.started += RollDiceInput;
     }
 
     private void RollDiceInput(InputAction.CallbackContext obj)
     {
+        if (!_canRollDice)
+            return;
+
         _animatorController._animator.SetTrigger(Animator.StringToHash("RollDice"));
+
+        _dice._animatorController._sprite.enabled = true;
+        _dice._animatorController._animator.SetBool(Animator.StringToHash("DiceThrow"), true);
+
+        StartCoroutine(_dice.Result());
+
     }
 
     private void JumpCanceled(InputAction.CallbackContext obj)
@@ -78,7 +89,6 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed -= MoveCanceled;
 
         _rolldice.action.started -= RollDiceInput;
-
     }
 
     void FixedUpdate()

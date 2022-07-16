@@ -14,6 +14,8 @@ public class Event : MonoBehaviour
     public event Action _onRollDiceStarted;
     public event Action _onRollDiceEnded;
 
+    public event Action<int> _onDiceResult;
+
     private void Awake()
     {
         current = this;

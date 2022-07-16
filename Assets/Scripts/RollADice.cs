@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class RollADice : MonoBehaviour
 {
+    [SerializeField] ChatBox _message = null;
+
     void Awake()
     {
+        StartDice();
     }
 
     void FixedUpdate()
@@ -13,8 +16,11 @@ public class RollADice : MonoBehaviour
         
     }
 
-    void StartDice()
+    public void StartDice()
     {
+        if (!Event.current)
+            return;
+        
         Event.current.OnStartRollDice();
     }
 }
