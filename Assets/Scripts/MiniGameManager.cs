@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MiniGameManager : MonoBehaviour
 {
+    [SerializeField] private MiniGame _currentGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class MiniGameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public MiniGame GetCurrentGame()
+    {
+        return _currentGame;
     }
 }
