@@ -22,12 +22,6 @@ public class IceShardJumpGame : MiniGame
     
     public override IEnumerator OnCleared()
     {
-        // if (_chosenArea._inIn)
-        //     Debug.Log("Correct !");
-        //
-        // else
-        //     Debug.Log("Wrong !");
-    
         StartCoroutine(base.OnCleared());
     
         float time = Time.time;

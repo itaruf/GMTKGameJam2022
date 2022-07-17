@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movingSpeed: 5
-  _delayBeforeLaunch: 1
+  _delayBeforeLaunch: 0
   _xPositionLowerBound: -8.39
   _xPositionUpperBound: 8.39
   _yPosition: -2.57
