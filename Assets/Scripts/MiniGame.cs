@@ -19,6 +19,10 @@ public class MiniGame : MonoBehaviour
         /*_chronoText._textMesh.enabled = false;*/
         _chronoText._textMesh.text = gameTimer.ToString();
         /*Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };*/
+        if (!Event.current)
+        {
+            Debug.Log("is null");
+        }
         Event.current._onStartMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(true); };
         Event.current._onClearedMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(false); };
     }

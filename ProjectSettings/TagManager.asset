@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Foreground
+  - Ground
+  - Bucket
   layers:
   - Default
   - TransparentFX
@@ -41,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 2972750997
+    locked: 0
+  - name: Foreground
+    uniqueID: 863868173
     locked: 0
