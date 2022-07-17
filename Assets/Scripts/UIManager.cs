@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,16 +16,27 @@ public class UIManager : MonoBehaviour
     private float _timeLeft;
     private float _maxTime;
     private bool _allowFlickering = true;
-
+    private bool _gameHasStarted = false;
     private MiniGame _minigame;
     // Start is called before the first frame update
     void Start()
     {
-        _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
-        _maxTime = _minigame.gameTimer;
-        _timeLeft = _maxTime;
+        Event.current._onStartMiniGame += GameHasStarted;
+
+        if (_gameHasStarted)
+        {
+            _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
+
+            _maxTime = _minigame.gameTimer;
+            _timeLeft = _maxTime;
+        }
+
     }
 
+    private void GameHasStarted()
+    {
+        _gameHasStarted = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -57,7 +69,12 @@ public class UIManager : MonoBehaviour
     {
         if (value.performed)
         {
-            SceneManager.LoadScene("DiceScene");
+            SceneManager.LoadScene("IntroScene");
         }
+    }
+
+    private void OnDestroy()
+    {
+        Event.current._onStartMiniGame -= GameHasStarted;
     }
 }
