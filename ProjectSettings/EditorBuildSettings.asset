@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IceJumpScene.unity
     guid: 0f5be080a1125c641bbbceb93665d0bd
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: 9fb8a6f8830116f4eaa2fabd6dcd4f68
   m_configObjects: {}
