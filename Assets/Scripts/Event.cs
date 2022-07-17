@@ -123,7 +123,7 @@ public class Event : MonoBehaviour
                 SceneManager.LoadScene("IceJumpScene");
                 break;
             case 4:
-                SceneManager.LoadScene("CalculScene");
+                SceneManager.LoadScene("LaserScene");
                 break;
             case 5:
                 SceneManager.LoadScene("FireBallScene");
