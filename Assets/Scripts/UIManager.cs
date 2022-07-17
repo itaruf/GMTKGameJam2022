@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        NoTimerScenes.Add("MenuScene");
+        NoTimerScenes.Add("StartMenu");
         NoTimerScenes.Add("DiceScene");
         NoTimerScenes.Add("IntroScene");
     }
@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _resultText.gameObject.SetActive(false);
+        
         Event.current._onStartMiniGame += GameHasStarted;
         Event.current._onGameLost += PlayerLose;
         Event.current._onGameWon += PlayerWon;
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
             _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
             _maxTime = _minigame.gameTimer;
             _timeLeft = _maxTime;
-
+            _resultText.gameObject.SetActive(false);
         }
 
         Event.current._onStartMiniGame += () => { StartCoroutine(Timer()); };
