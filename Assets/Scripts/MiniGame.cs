@@ -84,6 +84,12 @@ public class MiniGame : MonoBehaviour
         Debug.Log("Stop Game");
         StopCoroutine(StartTimer());
         /*Event.current.OnEndMiniGame();*/
+        StartCoroutine(ExitGame());
+    }
+
+    IEnumerator ExitGame()
+    {
+        yield return new WaitForSeconds(1.5f);
         Event.current.OnClearedMiniGame();
     }
 }

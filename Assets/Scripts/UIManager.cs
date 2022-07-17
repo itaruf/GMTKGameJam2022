@@ -13,26 +13,50 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float _flickeringDuration = 0.5f;
     [SerializeField] private Image _timerBar;
     [SerializeField] private float _chrono;
+    [SerializeField] private TextMeshProUGUI _resultText;
     private float _timeLeft;
     private float _maxTime;
     private bool _allowFlickering = true;
     private bool _gameHasStarted = false;
     private MiniGame _minigame;
+    private List<string> NoTimerScenes = new List<string>();
+
+    private void Awake()
+    {
+        NoTimerScenes.Add("MenuScene");
+        NoTimerScenes.Add("DiceScene");
+        NoTimerScenes.Add("IntroScene");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        _resultText.gameObject.SetActive(false);
         Event.current._onStartMiniGame += GameHasStarted;
-
-        if (_gameHasStarted)
+        Event.current._onGameLost += PlayerLose;
+        Event.current._onGameWon += PlayerWon;
+        if (!NoTimerScenes.Contains(SceneManager.GetActiveScene().name))
         {
             _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
-
             _maxTime = _minigame.gameTimer;
             _timeLeft = _maxTime;
+
         }
+
         Event.current._onStartMiniGame += () => { StartCoroutine(Timer()); };
     }
 
+    private void PlayerLose()
+    {
+        _resultText.gameObject.SetActive(true);
+        _resultText.text = "YOU LOST.";
+    }
+    
+    private void PlayerWon()
+    {
+        _resultText.gameObject.SetActive(true);
+        _resultText.text = "YOU WON.";
+    }
     private void GameHasStarted()
     {
         _gameHasStarted = true;

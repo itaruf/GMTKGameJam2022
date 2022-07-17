@@ -27,6 +27,7 @@ public class Event : MonoBehaviour
     public event Action<int> _onDiceResult;
 
     public event Action _onGameLost;
+    public event Action _onGameWon;
 
     public event Action<float> _onCollectLava;
 
@@ -89,7 +90,12 @@ public class Event : MonoBehaviour
     {
         _onGameLost?.Invoke();
     }
-
+    
+    public void OnGameWon()
+    {
+        _onGameWon?.Invoke();
+    }
+    
     public void OnCollectLava(float value)
     {
         _onCollectLava?.Invoke(value);

@@ -19,6 +19,7 @@ public class IceShard : MonoBehaviour
         transform.position = new Vector3((Random.Range(0,2) == 0 ? _xPositionLowerBound: _xPositionUpperBound ), _yPosition,0);
         _rb = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
+        // Event.current._onHalfWayMinGame += SpeedUp;
         //flipping assets if we spawned on the left side of the screen
         if (transform.position.x < 0)
         {
@@ -28,6 +29,10 @@ public class IceShard : MonoBehaviour
         StartCoroutine(PrepareLaunchingCoroutine());
     }
 
+    private void SpeedUp()
+    {
+        _movingSpeed *= 2;
+    }
     IEnumerator PrepareLaunchingCoroutine()
     {
         yield return new WaitForSeconds(_delayBeforeLaunch);
