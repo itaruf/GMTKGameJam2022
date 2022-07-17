@@ -14,7 +14,7 @@ public class RollADice : MonoBehaviour
     {
         StartCoroutine(StartDice());
 
-        Event.current._onDiceResult += (param) => { _message._textMesh.text = "You rolled a " + (param +  1) + " !"; };
+        Event.current._onDiceResult += (param) => { _message._textMesh.text = "You rolled a " + (param) + " !"; };
     }
 
     void FixedUpdate()

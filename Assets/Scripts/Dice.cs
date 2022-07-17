@@ -26,10 +26,10 @@ public class Dice : MonoBehaviour
         if (!TryGetComponent(out SpriteRenderer sprite))
             return;
 
-        Debug.Log("result : " + (result + 1));
+        Debug.Log("result : " + (result));
         sprite.sprite = sprites[result];
 
-    }
+    } 
 
     public IEnumerator Result()
     {
@@ -60,6 +60,6 @@ public class Dice : MonoBehaviour
         SwitchSide(result);
 
         Event.current.OnEndRollDice();
-        Event.current.OnDiceResult(result);
+        Event.current.OnDiceResult(result + 1);
     }
 }

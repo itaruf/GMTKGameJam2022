@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Foreground"))
+        if (collision.gameObject.CompareTag("Foreground") ||collision.gameObject.CompareTag("Ground"))
             _isJumping = false;
 
         if (collision.gameObject.TryGetComponent(out Dice dice) && _canRollDice)

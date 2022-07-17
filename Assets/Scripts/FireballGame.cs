@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class FireballGame : MiniGame
 {
-
     [SerializeField] ChatBox _text;
+
     void Awake()
     {
         base.Awake();
+
+        /*_text._textMesh.enabled = false;*/
+        Event.current._onStartMiniGame += () => { _text._textMesh.enabled = true; };
+
         StartCoroutine(StartGame());
     }
 
@@ -29,12 +33,6 @@ public class FireballGame : MiniGame
     
     public override IEnumerator OnCleared()
     {
-        // if (_chosenArea._inIn)
-        //     Debug.Log("Correct !");
-        //
-        // else
-        //     Debug.Log("Wrong !");
-    
         StartCoroutine(base.OnCleared());
     
         float time = Time.time;

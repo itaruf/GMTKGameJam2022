@@ -33,11 +33,13 @@ public class Fireball : MonoBehaviour
         {
             Debug.Log("Collided with bucket");
         }
+
         else if (other.CompareTag("Ground"))
         {
             Debug.Log("Collided with Ground");
-            
+            Event.current.OnGameLost();
         }
+
         Destroy(gameObject);
     }
 

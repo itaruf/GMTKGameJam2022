@@ -16,14 +16,15 @@ public class MiniGame : MonoBehaviour
 
     public void Awake()
     {
-        /*_chronoText._textMesh.enabled = false;*/
         _chronoText._textMesh.text = gameTimer.ToString();
+        _chronoText._textMesh.enabled = false;
+
         /*Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };*/
         if (!Event.current)
-        {
+
             Debug.Log("is null");
-        }
-        Event.current._onStartMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(true); };
+
+        Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };
         Event.current._onClearedMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(false); };
     }
 

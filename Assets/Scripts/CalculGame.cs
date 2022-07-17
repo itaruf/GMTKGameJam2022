@@ -25,7 +25,7 @@ public class CalculGame : MiniGame
     {
         base.Awake();
 
-        _text._textMesh.enabled = false;
+        /*_text._textMesh.enabled = false;*/
         Event.current._onStartMiniGame += () => { _text._textMesh.enabled = true; };
 
         List<int> numbers = new List<int>(numberOfValues);

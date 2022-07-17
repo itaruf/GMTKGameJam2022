@@ -24,6 +24,8 @@ public class Event : MonoBehaviour
 
     public event Action<int> _onDiceResult;
 
+    public event Action _onGameLost;
+
     private void Awake()
     {
         current = this;
@@ -60,12 +62,18 @@ public class Event : MonoBehaviour
 
     public void SelectMiniGame(int result)
     {
+        Debug.Log(result);
         StartCoroutine(SelectMiniGameCoroutine(result));
     }
 
     public void OnClearedMiniGame()
     {
         _onClearedMiniGame?.Invoke();
+    }
+
+    public void OnGameLost()
+    {
+        _onGameLost?.Invoke();
     }
 
     IEnumerator SelectMiniGameCoroutine(int result)
@@ -84,19 +92,19 @@ public class Event : MonoBehaviour
                 SceneManager.LoadScene("CalculScene");
                 break;
             case 2:
-                SceneManager.LoadScene("CalculScene");
+                SceneManager.LoadScene("FireBallScene");
                 break;
             case 3:
-                SceneManager.LoadScene("CalculScene");
+                SceneManager.LoadScene("IceJumpScene");
                 break;
             case 4:
                 SceneManager.LoadScene("CalculScene");
                 break;
             case 5:
-                SceneManager.LoadScene("CalculScene");
+                SceneManager.LoadScene("FireBallScene");
                 break;
             case 6:
-                SceneManager.LoadScene("CalculScene");
+                SceneManager.LoadScene("IceJumpScene");
                 break;
         }
 
