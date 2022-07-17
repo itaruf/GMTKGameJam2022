@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpForce = 5;
     Vector2 moveValue = new Vector2(0, 0);
 
-    private bool _isJumping = false;
-    private bool _canRollDice = false;
+    public bool _isJumping = false;
+    public bool _canRollDice = false;
 
     public Vector2 Direction { get; private set; }
     public void PrepareDirection(Vector2 v) => Direction = v.normalized;
@@ -32,11 +32,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Dice _dice = null;
 
+    // Icons
+    [SerializeField] Icon _rolldiceIcon = null;
+
     void Awake()
     {
-        Event.current._onRollDiceStarted += () => { _canRollDice = true; };
-        Event.current._onRollDiceEnded += () => { _canRollDice = false; };
+        Event.current._onRollDiceStarted += () => { _canRollDice = false; };
+        /*Event.current._onRollDiceEnded += () => { _canRollDice = false; };*/
 
+        if (_rolldiceIcon)
+            Event.current._onRollDiceStarted += _rolldiceIcon.Deactivation;
+        
         if (!_rb)
             TryGetComponent(out _rb);
 
@@ -49,7 +55,7 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed += JumpInput;
         _jump.action.canceled += JumpCanceled;
 
-        _rolldice.action.started += RollDiceInput;
+        /*_rolldice.action.started += RollDiceInput;*/
     }
 
     private void RollDiceInput(InputAction.CallbackContext obj)
@@ -63,7 +69,6 @@ public class PlayerController : MonoBehaviour
         _dice._animatorController._animator.SetBool(Animator.StringToHash("DiceThrow"), true);
 
         StartCoroutine(_dice.Result());
-
     }
 
     private void JumpCanceled(InputAction.CallbackContext obj)
@@ -144,6 +149,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Foreground"))
             _isJumping = false;
+
+        if (collision.gameObject.TryGetComponent(out Dice dice) && _canRollDice)
+        {
+            _rolldice.action.started += RollDiceInput;
+        }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Dice dice) && _canRollDice)
+        {
+            _rolldice.action.started -= RollDiceInput;
+        }
+    }
 }

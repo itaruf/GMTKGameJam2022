@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     {
         if (value.performed)
         {
-            SceneManager.LoadScene("CalculScene");
+            SceneManager.LoadScene("DiceScene");
         }
     }
 }

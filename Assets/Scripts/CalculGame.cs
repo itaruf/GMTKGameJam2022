@@ -84,18 +84,25 @@ public class CalculGame : MiniGame
         StartCoroutine(StartTimer());
     }
 
-    public override bool IsCleared()
+    public override IEnumerator OnCleared()
     {
         if (_chosenArea._inIn)
-        {
             Debug.Log("Correct !");
-            return true;
-        }
 
         else
             Debug.Log("Wrong !");
 
-        return false;
+        StartCoroutine(base.OnCleared());
+
+        float time = Time.time;
+        while (Time.time - time < endTimer)
+        {
+            currentChrono = Mathf.Round(Time.time - time);
+            _text._textMesh.text = "Returning in " + Mathf.Round(endTimer - currentChrono).ToString() + " ...";
+            yield return null;
+        }
+
+        Event.current.OnClearedMiniGame();
     }
 
     void ProcessQuestion(List<int> numbers)

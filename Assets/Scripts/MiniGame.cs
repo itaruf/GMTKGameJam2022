@@ -8,11 +8,10 @@ public class MiniGame : MonoBehaviour
     [Header("Timer")]
     public float startTimer = 1;
     public float gameTimer = 2;
-    public float endTimer = 1;
-
+    public float endTimer = 3;
 
     [Header("Chrono")]
-    public float currentChrono = 0;
+    protected float currentChrono = 0;
     [SerializeField] ChatBox _chronoText = null;
 
     public void Awake()
@@ -20,6 +19,8 @@ public class MiniGame : MonoBehaviour
         /*_chronoText._textMesh.enabled = false;*/
         _chronoText._textMesh.text = gameTimer.ToString();
         /*Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };*/
+        Event.current._onStartMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(true); };
+        Event.current._onClearedMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(false); };
     }
 
     void FixedUpdate()
@@ -36,10 +37,10 @@ public class MiniGame : MonoBehaviour
         StartCoroutine(StartTimer());
     }
 
-    public virtual bool IsCleared()
+    public virtual IEnumerator OnCleared()
     {
-        Debug.Log("Clear check");
-        return false;
+        _chronoText._textMesh.gameObject.SetActive(false);
+        yield return null;
     }
 
     public IEnumerator StartTimer()
@@ -57,6 +58,6 @@ public class MiniGame : MonoBehaviour
 
         Debug.Log("End Game");
         Event.current.OnEndMiniGame();
-        IsCleared();
+        StartCoroutine(OnCleared());
     }
 }

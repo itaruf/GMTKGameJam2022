@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,15 @@ using UnityEngine;
 public class RollADice : MonoBehaviour
 {
     [SerializeField] ChatBox _message = null;
+    [SerializeField] Dice _dice = null;
+
+    public Action<IEnumerator> _onDice;
 
     void Awake()
     {
-        StartDice();
+        StartCoroutine(StartDice());
+
+        Event.current._onDiceResult += (param) => { _message._textMesh.text = "You rolled a " + (param +  1) + " !"; };
     }
 
     void FixedUpdate()
@@ -16,11 +22,9 @@ public class RollADice : MonoBehaviour
         
     }
 
-    public void StartDice()
+    public IEnumerator StartDice()
     {
         if (!Event.current)
-            return;
-        
-        Event.current.OnStartRollDice();
+            yield return null;
     }
 }

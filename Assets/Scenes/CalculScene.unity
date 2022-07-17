@@ -1656,10 +1656,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 632924655, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 632924658, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7765177471006822569, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7765177471390240609, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
+      propertyPath: endTimer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765177471390240609, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
+      propertyPath: startTimer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7765177471390240609, guid: 6a8389629ef581b45801bca74425c1a0, type: 3}
       propertyPath: _areas.Array.data[0]
       value: 

@@ -7,49 +7,59 @@ public class Dice : MonoBehaviour
     public AnimatorController _animatorController = null;
     public List<Sprite> sprites = new List<Sprite>();
 
+    [SerializeField] int numberOfFaces = 6;
+    [SerializeField] Vector2 _diceForce = new Vector2(100, 300);
+    [SerializeField] Rigidbody2D _rb = null;
+
     void Awake()
     {
         if (!_animatorController)
             TryGetComponent(out _animatorController);
-
     }
 
     void FixedUpdate()
     {
-        
     }
 
     void SwitchSide(int result)
     {
-        //_animatorController._sprite.sprite = sprites[result];
         if (!TryGetComponent(out SpriteRenderer sprite))
             return;
 
+        Debug.Log("result : " + (result + 1));
         sprite.sprite = sprites[result];
+
     }
 
     public IEnumerator Result()
     {
+        Event.current.OnStartRollDice();
+
+        _animatorController._animator.SetBool(Animator.StringToHash("DiceThrow"), true);
+
+        _rb.AddForce(_diceForce);
+
         float time = Time.time;
-
-        /*while (_animatorController._animator.GetCurrentAnimatorStateInfo(0).IsName("DiceThrow"))
-        {
-            Debug.Log("yield");
+        while ((Time.time - time) < 1f)
             yield return null;
-        }*/
-
-        while (Time.time - time < 1f)
-        {
-            Debug.Log("yield");
-            yield return null;
-        }
 
         _animatorController._animator.SetBool(Animator.StringToHash("DiceThrow"), false);
         Destroy(_animatorController._animator);
 
-        int result = Random.Range(0, 6);
+        /*Quaternion start = Quaternion.Euler(transform.rotation.eulerAngles);
+        Quaternion end = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+
+        time = Time.time;
+        while ((Time.time - time) < 1f)
+        {
+            transform.rotation = Quaternion.Lerp(start, end, (Time.time - time));
+            yield return null;
+        }*/
+
+        int result = Random.Range(0, numberOfFaces);
         SwitchSide(result);
 
-        Debug.Log("result");
+        Event.current.OnEndRollDice();
+        Event.current.OnDiceResult(result);
     }
 }
