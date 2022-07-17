@@ -17,10 +17,7 @@ public class Event : MonoBehaviour
     // Actions
     public event Action _onStartMiniGame;
     public event Action _onEndMiniGame;
-
-    public event Action _onGameOutroStart;
-    public event Action _onGameOutroEnd;
-
+    public event Action _onClearedMiniGame;
     public event Action _onHalfWayMinGame;
     public event Action _onCrucialTimeMinGame;
 
@@ -30,7 +27,7 @@ public class Event : MonoBehaviour
     public event Action<int> _onDiceResult;
 
     public event Action _onGameLost;
-    public event Action _onGameWin;
+    public event Action _onGameWon;
 
     public event Action<float> _onCollectLava;
 
@@ -40,7 +37,7 @@ public class Event : MonoBehaviour
 
         _onDiceResult += SelectMiniGame;
         _onRollDiceEnded += () => { _chronoText._textMesh.gameObject.SetActive(true); };
-        _onGameOutroEnd += () => { SceneManager.LoadScene("DiceScene"); };
+        _onClearedMiniGame += () => { SceneManager.LoadScene("DiceScene"); };
     }
 
     public void OnStartMiniGame()
@@ -84,26 +81,21 @@ public class Event : MonoBehaviour
         StartCoroutine(SelectMiniGameCoroutine(result));
     }
 
-    public void OnGameOutroStart()
+    public void OnClearedMiniGame()
     {
-        _onGameOutroStart?.Invoke();
-    }
-
-    public void OnGameOutroEnd()
-    {
-        _onGameOutroEnd?.Invoke();
+        _onClearedMiniGame?.Invoke();
     }
 
     public void OnGameLost()
     {
         _onGameLost?.Invoke();
     }
-
-    public void OnGameWin()
+    
+    public void OnGameWon()
     {
-        _onGameLost?.Invoke();
+        _onGameWon?.Invoke();
     }
-
+    
     public void OnCollectLava(float value)
     {
         _onCollectLava?.Invoke(value);

@@ -31,10 +31,10 @@ public class FireballGame : MiniGame
         StartCoroutine(StartTimer());
     }
     
-    public override IEnumerator GameOutro()
+    public override IEnumerator OnCleared()
     {
-        StartCoroutine(base.GameOutro());
-
+        StartCoroutine(base.OnCleared());
+        Event.current.OnGameWon();
         float time = Time.time;
         while (Time.time - time < endTimer)
         {
@@ -42,8 +42,7 @@ public class FireballGame : MiniGame
             _text._textMesh.text = "Returning in " + Mathf.Round(endTimer - currentChrono).ToString() + " ...";
             yield return null;
         }
-
-
-        Event.current.OnGameOutroEnd();
+        
+        Event.current.OnClearedMiniGame();
     }
 }

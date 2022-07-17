@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private float _movingSpeed;
+    [SerializeField] private float _movingSpeed=2.0f;
 
     [SerializeField] private float _xPositionLowerBound;
     [SerializeField] private float _xPositionUpperBound;
@@ -18,8 +18,12 @@ public class Fireball : MonoBehaviour
     {
         transform.position = new Vector3(Random.Range(_xPositionLowerBound, _xPositionUpperBound), _yPosition,0);
         _rb = GetComponent<Rigidbody2D>();
+        // Event.current._onHalfWayMinGame += SpeedUp;
     }
-
+    private void SpeedUp()
+    {
+        _movingSpeed *= 2;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -31,14 +35,13 @@ public class Fireball : MonoBehaviour
     {
         if (other.CompareTag("Bucket"))
         {
-            Debug.Log("Collided with bucket");
+            // Debug.Log("Collided with bucket");
             Destroy(gameObject);
         }
 
         else if (other.CompareTag("Ground"))
         {
-            Debug.Log("Collided with Ground");
-            /*Event.current.OnEndMiniGame();*/
+            // Debug.Log("Collided with Ground");
             Event.current.OnGameLost();
         }
     }

@@ -14,11 +14,6 @@ public class MiniGame : MonoBehaviour
     protected float currentChrono = 0;
     [SerializeField] ChatBox _chronoText = null;
     private bool _halfwayPointReached = false;
-
-    IEnumerator StartTimerEnumerator = null;
-
-    bool _win = false;
-
     public void Awake()
     {
         _chronoText._textMesh.text = gameTimer.ToString();
@@ -26,18 +21,12 @@ public class MiniGame : MonoBehaviour
 
         /*Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };*/
         if (!Event.current)
+
             Debug.Log("is null");
 
-        StartTimerEnumerator = StartTimer();
-
         Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };
-        Event.current._onGameOutroStart += () => { _chronoText._textMesh.gameObject.SetActive(false); };
-
+        Event.current._onClearedMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(false); };
         Event.current._onGameLost += StopGame;
-        /*Event.current._onGameLost += () => { StopCoroutine(StartTimerEnumerator); };*/
-
-        /*Event.current._onGameWin += StopGame;
-        Event.current._onGameWin += () => { StopCoroutine(StartTimerEnumerator); };*/
     }
 
     void FixedUpdate()
@@ -54,16 +43,9 @@ public class MiniGame : MonoBehaviour
         StartCoroutine(StartTimer());
     }
 
-    public virtual IEnumerator GameOutro()
+    public virtual IEnumerator OnCleared()
     {
-        Event.current.OnGameOutroStart();
         _chronoText._textMesh.gameObject.SetActive(false);
-
-       /* if (_win)
-            Event.current.OnGameWin();
-        else
-            Event.current.OnGameLost();*/
-
         yield return null;
     }
 
@@ -77,15 +59,16 @@ public class MiniGame : MonoBehaviour
         {
             currentChrono = Mathf.Round(Time.time - time);
             _chronoText._textMesh.text = Mathf.Round(gameTimer - currentChrono).ToString();
-
             if (!_halfwayPointReached)
+            {
                 CheckIfHalfWayPointReached(currentChrono);
-
+            }
             yield return null;
         }
 
-        _win = true;
-        StopGame();
+        Debug.Log("End Game");
+        Event.current.OnEndMiniGame();
+        StartCoroutine(OnCleared());
     }
 
     public void CheckIfHalfWayPointReached(float currentChrono)
@@ -99,10 +82,14 @@ public class MiniGame : MonoBehaviour
     public virtual void StopGame()
     {
         Debug.Log("Stop Game");
+        StopCoroutine(StartTimer());
+        /*Event.current.OnEndMiniGame();*/
+        StartCoroutine(ExitGame());
+    }
 
-        StopCoroutine(StartTimerEnumerator);
-
-        Event.current.OnEndMiniGame();
-        StartCoroutine(GameOutro());
+    IEnumerator ExitGame()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Event.current.OnClearedMiniGame();
     }
 }
