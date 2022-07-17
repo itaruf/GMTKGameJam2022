@@ -65,9 +65,9 @@ public class IceShard : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Collided with player");
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
     }
 
     private void CheckIfOutOfBounds()

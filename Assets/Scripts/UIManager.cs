@@ -4,25 +4,44 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _startText;
     [SerializeField] private float _flickeringDuration = 0.5f;
+    [SerializeField] private Image _timerBar;
+    [SerializeField] private float _chrono;
+    private float _timeLeft;
+    private float _maxTime;
     private bool _allowFlickering = true;
+
+    private MiniGame _minigame;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
+        _maxTime = _minigame.gameTimer;
+        _timeLeft = _maxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_allowFlickering)
+        if (_allowFlickering && (SceneManager.GetActiveScene().name == "StartMenu"))
         {
             StartCoroutine(DisableStartTextCoroutine());
         }
+        else
+        {
+            if (_timeLeft > 0)
+            {
+                _timeLeft -= Time.deltaTime;
+                _timerBar.fillAmount = _timeLeft / _maxTime;
+            }
+
+        }
+       
     }
 
 
