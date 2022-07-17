@@ -12,6 +12,7 @@ public class FireballGame : MiniGame
 
         /*_text._textMesh.enabled = false;*/
         Event.current._onStartMiniGame += () => { _text._textMesh.enabled = true; };
+        Event.current._onGameLost += DestroyFireBalls;
 
         StartCoroutine(StartGame());
     }
@@ -19,9 +20,9 @@ public class FireballGame : MiniGame
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     public override IEnumerator StartGame()
     {
         float time = Time.time;
@@ -30,11 +31,14 @@ public class FireballGame : MiniGame
 
         StartCoroutine(StartTimer());
     }
-    
+
     public override IEnumerator OnCleared()
     {
         StartCoroutine(base.OnCleared());
         Event.current.OnGameWon();
+
+        DestroyFireBalls();
+
         float time = Time.time;
         while (Time.time - time < endTimer)
         {
@@ -42,7 +46,14 @@ public class FireballGame : MiniGame
             _text._textMesh.text = "Returning in " + Mathf.Round(endTimer - currentChrono).ToString() + " ...";
             yield return null;
         }
-        
+
         Event.current.OnClearedMiniGame();
+    }
+
+    void DestroyFireBalls()
+    {
+        var fireballs = FindObjectsOfType<Fireball>();
+        foreach (var fireball in fireballs)
+            Destroy(fireball.gameObject);
     }
 }

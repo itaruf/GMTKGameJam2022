@@ -52,9 +52,7 @@ public class Laser : MonoBehaviour
         /* else if (other.CompareTag("Ground"))
              Event.current.OnGameLost();*/
 
-        Destroy(groundMark);
-        Destroy(gameObject);
-
+        DestroyLaser();
         SpeedUp();
     }
 
@@ -65,5 +63,11 @@ public class Laser : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void DestroyLaser()
+    {
+        Destroy(groundMark);
+        Destroy(gameObject);
     }
 }

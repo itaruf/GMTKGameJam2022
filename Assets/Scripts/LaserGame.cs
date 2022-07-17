@@ -11,6 +11,8 @@ public class LaserGame : MiniGame
         base.Awake();
 
         Event.current._onStartMiniGame += () => { _text._textMesh.enabled = true; };
+        Event.current._onGameLost += DestroyLasers;
+
         StartCoroutine(StartGame());
     }
 
@@ -32,6 +34,9 @@ public class LaserGame : MiniGame
     {
         StartCoroutine(base.OnCleared());
         Event.current.OnGameWon();
+
+        DestroyLasers();
+
         float time = Time.time;
         while (Time.time - time < endTimer)
         {
@@ -41,5 +46,12 @@ public class LaserGame : MiniGame
         }
 
         Event.current.OnClearedMiniGame();
+    }
+
+    void DestroyLasers()
+    {
+        var lasers = FindObjectsOfType<Laser>();
+        foreach (var laser in lasers)
+            laser.DestroyLaser();
     }
 }

@@ -16,6 +16,8 @@ public class SpawnManager : MonoBehaviour
     {
         Event.current._onStartMiniGame += StartSpawn;
         Event.current._onEndMiniGame += StopSpawn;
+        Event.current._onGameLost += StopSpawn;
+
         // StartSpawn();
     }
 
@@ -35,13 +37,13 @@ public class SpawnManager : MonoBehaviour
         _spawningAllowed = false;
         StopCoroutine(SpawnCoroutine());
 
-        var fireballs = FindObjectsOfType<Fireball>();
+        /*var fireballs = FindObjectsOfType<Fireball>();
         foreach (var fireball in fireballs)
             Destroy(fireball.gameObject);
 
         var iceshards = FindObjectsOfType<IceShard>();
         foreach (var iceShard in iceshards)
-            Destroy(iceShard.gameObject);
+            Destroy(iceShard.gameObject);*/
     }
 
     IEnumerator SpawnCoroutine()

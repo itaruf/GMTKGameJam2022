@@ -9,6 +9,9 @@ public class IceShardJumpGame : MiniGame
     void Awake()
     {
         base.Awake();
+
+        Event.current._onGameLost += DestroyIceShards;
+
         StartCoroutine(StartGame());
     }
     public override IEnumerator StartGame()
@@ -23,7 +26,9 @@ public class IceShardJumpGame : MiniGame
     public override IEnumerator OnCleared()
     {
         StartCoroutine(base.OnCleared());
-    
+
+        DestroyIceShards();
+
         float time = Time.time;
         while (Time.time - time < endTimer)
         {
@@ -35,4 +40,12 @@ public class IceShardJumpGame : MiniGame
         Event.current.OnClearedMiniGame();
         Event.current.OnEndMiniGame();
     }
+
+    void DestroyIceShards()
+    {
+        var iceshards = FindObjectsOfType<IceShard>();
+        foreach (var iceshard in iceshards)
+            Destroy(iceshard.gameObject);
+    }
+
 }
