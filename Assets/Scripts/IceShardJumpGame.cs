@@ -20,10 +20,11 @@ public class IceShardJumpGame : MiniGame
         StartCoroutine(StartTimer());
     }
     
-    public override IEnumerator OnCleared()
+    public override IEnumerator GameOutro()
     {
-        StartCoroutine(base.OnCleared());
-    
+        StartCoroutine(base.GameOutro());
+        Event.current.OnGameOutroStart();
+
         float time = Time.time;
         while (Time.time - time < endTimer)
         {
@@ -32,7 +33,6 @@ public class IceShardJumpGame : MiniGame
             yield return null;
         }
         
-        Event.current.OnClearedMiniGame();
-        Event.current.OnEndMiniGame();
+        Event.current.OnGameOutroEnd();
     }
 }

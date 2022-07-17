@@ -38,6 +38,7 @@ public class Fireball : MonoBehaviour
         else if (other.CompareTag("Ground"))
         {
             Debug.Log("Collided with Ground");
+            /*Event.current.OnEndMiniGame();*/
             Event.current.OnGameLost();
         }
     }

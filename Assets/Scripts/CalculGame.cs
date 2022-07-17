@@ -84,7 +84,7 @@ public class CalculGame : MiniGame
         StartCoroutine(StartTimer());
     }
 
-    public override IEnumerator OnCleared()
+    public override IEnumerator GameOutro()
     {
         if (_chosenArea._inIn)
             Debug.Log("Correct !");
@@ -92,7 +92,8 @@ public class CalculGame : MiniGame
         else
             Debug.Log("Wrong !");
 
-        StartCoroutine(base.OnCleared());
+        StartCoroutine(base.GameOutro());
+        Event.current.OnGameOutroStart();
 
         float time = Time.time;
         while (Time.time - time < endTimer)
@@ -102,7 +103,7 @@ public class CalculGame : MiniGame
             yield return null;
         }
 
-        Event.current.OnClearedMiniGame();
+        Event.current.OnGameOutroEnd();
     }
 
     void ProcessQuestion(List<int> numbers)
