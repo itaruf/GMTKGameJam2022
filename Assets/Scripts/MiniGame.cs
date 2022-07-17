@@ -7,13 +7,13 @@ public class MiniGame : MonoBehaviour
 {
     [Header("Timer")]
     public float startTimer = 1;
-    public float gameTimer = 2;
+    public float gameTimer = 10;
     public float endTimer = 3;
 
     [Header("Chrono")]
     protected float currentChrono = 0;
     [SerializeField] ChatBox _chronoText = null;
-
+    private bool _halfwayPointReached = false;
     public void Awake()
     {
         _chronoText._textMesh.text = gameTimer.ToString();
@@ -59,6 +59,10 @@ public class MiniGame : MonoBehaviour
         {
             currentChrono = Mathf.Round(Time.time - time);
             _chronoText._textMesh.text = Mathf.Round(gameTimer - currentChrono).ToString();
+            if (!_halfwayPointReached)
+            {
+                CheckIfHalfWayPointReached(currentChrono);
+            }
             yield return null;
         }
 
@@ -67,6 +71,14 @@ public class MiniGame : MonoBehaviour
         StartCoroutine(OnCleared());
     }
 
+    public void CheckIfHalfWayPointReached(float currentChrono)
+    {
+        if (currentChrono >= gameTimer / 2)
+        {
+            Event.current.HalfwayMiniGame();
+            _halfwayPointReached = true;
+        }
+    }
     public virtual void StopGame()
     {
         Debug.Log("stop game");

@@ -37,7 +37,7 @@ public class IceShardJumpGame : MiniGame
             _text._textMesh.text = "Returning in " + Mathf.Round(endTimer - currentChrono).ToString() + " ...";
             yield return null;
         }
-    
+        
         Event.current.OnClearedMiniGame();
     }
 }

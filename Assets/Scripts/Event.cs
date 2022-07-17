@@ -18,6 +18,8 @@ public class Event : MonoBehaviour
     public event Action _onStartMiniGame;
     public event Action _onEndMiniGame;
     public event Action _onClearedMiniGame;
+    public event Action _onHalfWayMinGame;
+    public event Action _onCrucialTimeMinGame;
 
     public event Action _onRollDiceStarted;
     public event Action _onRollDiceEnded;
@@ -43,6 +45,16 @@ public class Event : MonoBehaviour
     public void OnEndMiniGame()
     {
         _onEndMiniGame?.Invoke();
+    }
+
+    public void HalfwayMiniGame()
+    {
+        _onHalfWayMinGame?.Invoke();   
+    }
+    
+    public void CrucialTimeMiniGame()
+    {
+        _onCrucialTimeMinGame?.Invoke();
     }
 
     public void OnStartRollDice()

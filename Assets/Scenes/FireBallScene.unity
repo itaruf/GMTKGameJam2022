@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTimer: 1
-  gameTimer: 60
+  gameTimer: 10
   endTimer: 1
   _chronoText: {fileID: 1519333562}
   _text: {fileID: 481709765}
