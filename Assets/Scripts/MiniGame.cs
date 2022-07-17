@@ -26,6 +26,7 @@ public class MiniGame : MonoBehaviour
 
         Event.current._onStartMiniGame += () => { _chronoText._textMesh.enabled = true; };
         Event.current._onClearedMiniGame += () => { _chronoText._textMesh.gameObject.SetActive(false); };
+        Event.current._onGameLost += StopGame;
     }
 
     void FixedUpdate()
@@ -64,5 +65,13 @@ public class MiniGame : MonoBehaviour
         Debug.Log("End Game");
         Event.current.OnEndMiniGame();
         StartCoroutine(OnCleared());
+    }
+
+    public virtual void StopGame()
+    {
+        Debug.Log("stop game");
+        StopCoroutine(StartTimer());
+        /*Event.current.OnEndMiniGame();*/
+        Event.current.OnClearedMiniGame();
     }
 }

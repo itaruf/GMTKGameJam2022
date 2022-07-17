@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     Coroutine MovementTracking { get; set; }
 
     [SerializeField] Dice _dice = null;
+    [SerializeField] Bucket _bucket = null;
 
     // Icons
     [SerializeField] Icon _rolldiceIcon = null;
@@ -125,6 +126,19 @@ public class PlayerController : MonoBehaviour
         moveValue = obj.ReadValue<Vector2>();
         _animatorController.FlipX(obj.ReadValue<Vector2>());
         _animatorController._animator.SetBool(Animator.StringToHash("IsMoving"), true);
+
+        if (_bucket)
+        {
+            switch (moveValue)
+            {
+                case Vector2 v when v.Equals(Vector2.left):
+                    _bucket.transform.position = transform.TransformPoint(-_bucket._offset.x, _bucket._offset.y, 0); 
+                    break;
+                case Vector2 v when v.Equals(Vector2.right):
+                    _bucket.transform.position = transform.TransformPoint(_bucket._offset.x, _bucket._offset.y, 0);
+                    break;
+            }
+        }
     }
 
     private void Move()
