@@ -28,7 +28,7 @@ public class Laser : MonoBehaviour
 
        TryGetComponent(out _rb);
 
-        Event.current._onHalfWayMinGame += SpeedUp;
+        /*Event.current._onHalfWayMinGame += SpeedUp;*/
     }
     private void SpeedUp()
     {

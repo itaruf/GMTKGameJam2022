@@ -21,6 +21,7 @@ public class Fireball : MonoBehaviour
 
         Event.current._onCollectLava += SpeedUp;
     }
+
     private void SpeedUp(float value)
     {
         _movingSpeed += _speedBonus;

@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5fee7def0f6c494fa07245889c1eb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingSpeed: 10
+  _movingSpeed: 8
+  _speedBonus: 1
   _delayBeforeLaunch: 0
   _xPositionLowerBound: -8.39
   _xPositionUpperBound: 8.39

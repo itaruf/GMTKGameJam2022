@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class IceShard : MonoBehaviour
 {
-    [SerializeField] private float _movingSpeed = 1.0f;
+    [SerializeField] static float _movingSpeed = 6f;
+    [SerializeField] float _speedBonus = 1f;
+
     [SerializeField] private float _delayBeforeLaunch = 1.0f;
     [SerializeField] private float _xPositionLowerBound = -8.39f;
     [SerializeField] private float _xPositionUpperBound = 8.39f;
     [SerializeField] private float _yPosition = -2.57f;
     private bool _isLaunched;
     private SpriteRenderer _sprite;
+
     private Rigidbody2D _rb;
-    // Start is called before the first frame update
+
     void Start()
     {
         //Spawning ice shard either at _xPositionLower or _xPositionUpper
@@ -31,8 +34,9 @@ public class IceShard : MonoBehaviour
 
     private void SpeedUp()
     {
-        _movingSpeed *= 2;
+        _movingSpeed += _speedBonus;
     }
+
     IEnumerator PrepareLaunchingCoroutine()
     {
         yield return new WaitForSeconds(_delayBeforeLaunch);
@@ -82,6 +86,7 @@ public class IceShard : MonoBehaviour
         if (transform.position.x < -9.0 || transform.position.x > 9.0)
         {
             Destroy(gameObject);
+            SpeedUp();
         }
     }
 }
