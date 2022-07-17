@@ -24,6 +24,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -142,7 +143,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fe9b26df2d8ff3049830b414add4a687
-      internalID: 1667709438
+      internalID: 8296914517159475318
       vertices: []
       indices: 
       edges: []
@@ -163,7 +164,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3c90dbc3e7dc66946aa36604b9291905
-      internalID: -83397348
+      internalID: -2709206999813171688
       vertices: []
       indices: 
       edges: []
@@ -184,7 +185,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e2ec2f141520c7d43a0e7e05866de9bc
-      internalID: -140270224
+      internalID: -635914625358036691
       vertices: []
       indices: 
       edges: []
@@ -205,7 +206,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: bf71d8d6e63909f48a05ff18513bb11d
-      internalID: -1322195676
+      internalID: -2001288511941155281
       vertices: []
       indices: 
       edges: []
@@ -226,7 +227,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 028d528dcbe6c2348a0534d473e94d7f
-      internalID: -683879485
+      internalID: 6059925069718772546
       vertices: []
       indices: 
       edges: []
@@ -247,7 +248,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 38d7ef129abae734facbda332d5fe7e3
-      internalID: 1147290007
+      internalID: -2769633211213325744
       vertices: []
       indices: 
       edges: []
@@ -262,6 +263,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      DiceResult_0: 8296914517159475318
+      DiceResult_1: -2709206999813171688
+      DiceResult_2: -635914625358036691
+      DiceResult_4: 6059925069718772546
+      DiceResult_3: -2001288511941155281
+      DiceResult_5: -2769633211213325744
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
