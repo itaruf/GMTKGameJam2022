@@ -14,13 +14,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _timerBar;
     [SerializeField] private float _chrono;
     [SerializeField] private TextMeshProUGUI _resultText;
+    [SerializeField] private TextMeshProUGUI _promptText;
     private float _timeLeft;
     private float _maxTime;
     private bool _allowFlickering = true;
     private bool _gameHasStarted = false;
     private MiniGame _minigame;
     private List<string> NoTimerScenes = new List<string>();
-
+    private int _counterCatKicked = 0;
     private void Awake()
     {
         NoTimerScenes.Add("StartMenu");
@@ -35,17 +36,24 @@ public class UIManager : MonoBehaviour
         Event.current._onStartMiniGame += GameHasStarted;
         Event.current._onGameLost += PlayerLose;
         Event.current._onGameWon += PlayerWon;
+        Event.current._onCatKicked += CatKicked;
         if (!NoTimerScenes.Contains(SceneManager.GetActiveScene().name))
         {
             _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
             _maxTime = _minigame.gameTimer;
             _timeLeft = _maxTime;
             _resultText.gameObject.SetActive(false);
+            
         }
 
         Event.current._onStartMiniGame += () => { StartCoroutine(Timer()); };
     }
 
+    private void CatKicked()
+    {
+        _counterCatKicked++;
+        _promptText.text = _counterCatKicked + " / " + 5;
+    }
     private void PlayerLose()
     {
         _resultText.gameObject.SetActive(true);
@@ -97,5 +105,6 @@ public class UIManager : MonoBehaviour
     private void OnDestroy()
     {
         Event.current._onStartMiniGame -= GameHasStarted;
+        Event.current._onCatKicked -= CatKicked;
     }
 }

@@ -62,6 +62,15 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick"",
+                    ""type"": ""Button"",
+                    ""id"": ""37f8f967-bab3-4a3f-ae66-7c2f28eb1e25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,6 +150,17 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""855a917d-3bb0-4bbf-a199-41f9439c351e"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -153,6 +173,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         m_Inputs_Jump = m_Inputs.FindAction("Jump", throwIfNotFound: true);
         m_Inputs_RollDice = m_Inputs.FindAction("RollDice", throwIfNotFound: true);
         m_Inputs_Start = m_Inputs.FindAction("Start", throwIfNotFound: true);
+        m_Inputs_Kick = m_Inputs.FindAction("Kick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +237,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Inputs_Jump;
     private readonly InputAction m_Inputs_RollDice;
     private readonly InputAction m_Inputs_Start;
+    private readonly InputAction m_Inputs_Kick;
     public struct InputsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -224,6 +246,7 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Inputs_Jump;
         public InputAction @RollDice => m_Wrapper.m_Inputs_RollDice;
         public InputAction @Start => m_Wrapper.m_Inputs_Start;
+        public InputAction @Kick => m_Wrapper.m_Inputs_Kick;
         public InputActionMap Get() { return m_Wrapper.m_Inputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -245,6 +268,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Start.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
                 @Start.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
                 @Start.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnStart;
+                @Kick.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnKick;
+                @Kick.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnKick;
+                @Kick.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnKick;
             }
             m_Wrapper.m_InputsActionsCallbackInterface = instance;
             if (instance != null)
@@ -261,6 +287,9 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
                 @Start.started += instance.OnStart;
                 @Start.performed += instance.OnStart;
                 @Start.canceled += instance.OnStart;
+                @Kick.started += instance.OnKick;
+                @Kick.performed += instance.OnKick;
+                @Kick.canceled += instance.OnKick;
             }
         }
     }
@@ -271,5 +300,6 @@ public partial class @PlayerInputs : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnRollDice(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
+        void OnKick(InputAction.CallbackContext context);
     }
 }

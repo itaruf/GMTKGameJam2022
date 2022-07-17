@@ -24,6 +24,8 @@ public class Event : MonoBehaviour
     public event Action _onRollDiceStarted;
     public event Action _onRollDiceEnded;
 
+    public event Action _onKick;
+    public event Action _onCatKicked;
     public event Action<int> _onDiceResult;
 
     public event Action _onGameLost;
@@ -70,6 +72,15 @@ public class Event : MonoBehaviour
         _onRollDiceEnded?.Invoke();
     }
 
+    public void Kick()
+    {
+        _onKick?.Invoke();
+    }
+
+    public void CatKicked()
+    {
+        _onCatKicked?.Invoke();
+    }
     public void OnDiceResult(int result)
     {
         _onDiceResult?.Invoke(result);
