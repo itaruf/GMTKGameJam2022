@@ -87,10 +87,9 @@ public class CalculGame : MiniGame
     public override IEnumerator OnCleared()
     {
         if (_chosenArea._inIn)
-            Debug.Log("Correct !");
-
+            Event.current.OnGameWon();
         else
-            Debug.Log("Wrong !");
+            Event.current.OnGameLost();
 
         StartCoroutine(base.OnCleared());
 

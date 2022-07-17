@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LaserScene.unity
     guid: cc6cc4d05c8161a479b51fd04a850f1c
+  - enabled: 1
+    path: Assets/Scenes/KickCat.unity
+    guid: 317694992fe8b7346947a08475ba27c9
   m_configObjects: {}

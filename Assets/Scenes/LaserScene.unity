@@ -977,6 +977,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 1621208a7b8ec4149a6e3bc9b2beb2dc, type: 2}
     - target: {fileID: 7063277067466264253, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
+      propertyPath: _kick
+      value: 
+      objectReference: {fileID: 2183762700059529778, guid: 35438019c3f435e4b9a40035c70a744e, type: 3}
+    - target: {fileID: 7063277067466264253, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
       propertyPath: _bucket
       value: 
       objectReference: {fileID: 0}
@@ -1175,7 +1179,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.14901961, g: 0.16862746, b: 0.26666668, a: 0}
+  m_BackGroundColor: {r: 0.22745098, g: 0.26666668, b: 0.4, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

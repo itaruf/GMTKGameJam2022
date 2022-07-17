@@ -33,9 +33,8 @@ public class LaserGame : MiniGame
     public override IEnumerator OnCleared()
     {
         StartCoroutine(base.OnCleared());
-        Event.current.OnGameWon();
-
         DestroyLasers();
+        Event.current.OnGameWon();
 
         float time = Time.time;
         while (Time.time - time < endTimer)
