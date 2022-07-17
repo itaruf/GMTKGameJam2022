@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     private float _timeLeft;
     private float _maxTime;
     private bool _allowFlickering = true;
-    private bool _gameHasStarted = false;
+    private bool _gameHasStarted = true;
     private MiniGame _minigame;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,17 @@ public class UIManager : MonoBehaviour
             _maxTime = _minigame.gameTimer;
             _timeLeft = _maxTime;
         }
-        Event.current._onStartMiniGame += () => { StartCoroutine(Timer()); };
+
+        IEnumerator timer = Timer();
+
+        Event.current._onStartMiniGame += () => { StartCoroutine(timer); };
+        Event.current._onEndMiniGame += () => { StopCoroutine(timer); };
+
+        /*Event.current._onGameLost += () => { StopCoroutine(timer); };
+        Event.current._onGameLost += () => { if (_startText) _startText.text = "You loose !"; };
+
+        Event.current._onGameWin += () => { StopCoroutine(timer); };
+        Event.current._onGameWin += () => { if (_startText) _startText.text = "You win !"; };*/
     }
 
     private void GameHasStarted()
