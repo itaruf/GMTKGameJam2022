@@ -8,6 +8,8 @@ public class Bucket : MonoBehaviour
     [SerializeField] AnimatorController _animatorController = null;
     public Vector3 _offset = new Vector3(0, 0, 0);
 
+    [SerializeField] float _msBoost = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,9 @@ public class Bucket : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Fireball fireBall))
+        {
             _animatorController._animator.SetTrigger(Animator.StringToHash("Fill"));
+            Event.current.OnCollectLava(_msBoost);
+        }
     }
 }

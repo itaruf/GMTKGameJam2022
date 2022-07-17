@@ -56,7 +56,13 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed += JumpInput;
         _jump.action.canceled += JumpCanceled;
 
+        Event.current._onCollectLava += IncreaseMS;
         /*_rolldice.action.started += RollDiceInput;*/
+    }
+
+    private void IncreaseMS(float value)
+    {
+        _ms += value;
     }
 
     private void RollDiceInput(InputAction.CallbackContext obj)
