@@ -28,6 +28,8 @@ public class Event : MonoBehaviour
 
     public event Action _onGameLost;
 
+    public event Action<float> _onCollectLava;
+
     private void Awake()
     {
         current = this;
@@ -86,6 +88,11 @@ public class Event : MonoBehaviour
     public void OnGameLost()
     {
         _onGameLost?.Invoke();
+    }
+
+    public void OnCollectLava(float value)
+    {
+        _onCollectLava?.Invoke(value);
     }
 
     IEnumerator SelectMiniGameCoroutine(int result)

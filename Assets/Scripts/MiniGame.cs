@@ -81,7 +81,7 @@ public class MiniGame : MonoBehaviour
     }
     public virtual void StopGame()
     {
-        Debug.Log("stop game");
+        Debug.Log("Stop Game");
         StopCoroutine(StartTimer());
         /*Event.current.OnEndMiniGame();*/
         Event.current.OnClearedMiniGame();

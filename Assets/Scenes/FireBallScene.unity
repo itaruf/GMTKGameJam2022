@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839eab3e8444ced4eaa0561d7f6f8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimer: 2
-  gameTimer: 10
-  endTimer: 1
+  startTimer: 3
+  gameTimer: 15
+  endTimer: 3
   _chronoText: {fileID: 1519333562}
   _text: {fileID: 481709765}
 --- !u!1 &440113295
@@ -303,6 +303,7 @@ MonoBehaviour:
   _owner: {fileID: 1514037161}
   _animatorController: {fileID: 440113300}
   _offset: {x: 0.021, y: 0.377, z: 0}
+  _msBoost: 0.5
 --- !u!114 &440113300
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,5 +33,6 @@ public class IceShardJumpGame : MiniGame
         }
         
         Event.current.OnClearedMiniGame();
+        Event.current.OnEndMiniGame();
     }
 }

@@ -33,14 +33,23 @@ public class SpawnManager : MonoBehaviour
     public void StopSpawn()
     {
         _spawningAllowed = false;
+        StopCoroutine(SpawnCoroutine());
+
+        var fireballs = FindObjectsOfType<Fireball>();
+        foreach (var fireball in fireballs)
+            Destroy(fireball.gameObject);
+
+        var iceshards = FindObjectsOfType<IceShard>();
+        foreach (var iceShard in iceshards)
+            Destroy(iceShard.gameObject);
     }
 
     IEnumerator SpawnCoroutine()
     {
         while (_spawningAllowed)
         {
-            yield return new WaitForSeconds(Random.Range(_spawnFrequenceLowerRange,_spawnFrequenceHigherRange));
             SpawnObject();
+            yield return new WaitForSeconds(Random.Range(_spawnFrequenceLowerRange,_spawnFrequenceHigherRange));
         }
     }
 
