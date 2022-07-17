@@ -363,8 +363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b944229e8f729984e8cf57381296b4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimer: 1
-  gameTimer: 30
+  startTimer: 2
+  gameTimer: 5
   endTimer: 3
   _chronoText: {fileID: 1642482469}
   _text: {fileID: 1642482469}
@@ -553,6 +553,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1822628396066718661, guid: 1c7fd41f1d06caa41a5afc80e81ecda8, type: 2}
     - target: {fileID: 8149558182566134511, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
+      propertyPath: m_text
+      value: 'Dodge !
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149558182566134511, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 1c7fd41f1d06caa41a5afc80e81ecda8, type: 2}
@@ -560,6 +566,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 1822628396066718661, guid: 1c7fd41f1d06caa41a5afc80e81ecda8, type: 2}
+    - target: {fileID: 8149558183011214529, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1995483384}
     - target: {fileID: 8149558183011214533, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_Name
       value: ChatBox

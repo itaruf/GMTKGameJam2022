@@ -23,27 +23,26 @@ public class UIManager : MonoBehaviour
         _minigame = GameObject.Find("Game_Manager").GetComponent<MiniGameManager>().GetCurrentGame();
         _maxTime = _minigame.gameTimer;
         _timeLeft = _maxTime;
+
+        Event.current._onStartMiniGame += () => { StartCoroutine(Timer()); };
     }
 
     // Update is called once per frame
     void Update()
     {
         if (_allowFlickering && (SceneManager.GetActiveScene().name == "StartMenu"))
-        {
             StartCoroutine(DisableStartTextCoroutine());
-        }
-        else
-        {
-            if (_timeLeft > 0)
-            {
-                _timeLeft -= Time.deltaTime;
-                _timerBar.fillAmount = _timeLeft / _maxTime;
-            }
-
-        }
-       
     }
 
+    IEnumerator Timer()
+    {
+        while (_timeLeft > 0)
+        {
+            _timeLeft -= Time.deltaTime;
+            _timerBar.fillAmount = _timeLeft / _maxTime;
+            yield return null;
+        }
+    }
 
     IEnumerator DisableStartTextCoroutine()
     {

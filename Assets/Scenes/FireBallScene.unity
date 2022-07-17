@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839eab3e8444ced4eaa0561d7f6f8009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimer: 1
+  startTimer: 2
   gameTimer: 10
   endTimer: 1
   _chronoText: {fileID: 1519333562}
