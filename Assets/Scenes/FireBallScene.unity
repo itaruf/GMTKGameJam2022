@@ -203,7 +203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440113295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.165, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0.021, y: 0.377, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _owner: {fileID: 1514037161}
   _animatorController: {fileID: 440113300}
-  _offset: {x: 0.165, y: 0.15, z: 0}
+  _offset: {x: 0.021, y: 0.377, z: 0}
 --- !u!114 &440113300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,10 +853,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7063277067466263874, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 36a4c9428fc42bb45b128961eedd3624, type: 2}
     - target: {fileID: 7063277067466263875, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -962608591, guid: 6860e2e03451d644d9f50ffec9019ff9, type: 3}
+      objectReference: {fileID: 1689004937, guid: 731ccb6306741a14885ddd19dfd40973, type: 3}
     - target: {fileID: 7063277067466263875, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -875,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063277067466264254, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.95
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 7063277067466264254, guid: ea0e7b6a89cb6dc47831fd2ef0c9d4b1, type: 3}
       propertyPath: m_LocalPosition.z
