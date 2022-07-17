@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private float _movingSpeed=2.0f;
-
+    [SerializeField] private static float _movingSpeed = 2.0f;
+    [SerializeField] float _speedBonus = 0.1f;
     [SerializeField] private float _xPositionLowerBound;
     [SerializeField] private float _xPositionUpperBound;
     [SerializeField] private float _yPosition;
@@ -18,11 +18,12 @@ public class Fireball : MonoBehaviour
     {
         transform.position = new Vector3(Random.Range(_xPositionLowerBound, _xPositionUpperBound), _yPosition,0);
         _rb = GetComponent<Rigidbody2D>();
-        // Event.current._onHalfWayMinGame += SpeedUp;
+
+        Event.current._onCollectLava += SpeedUp;
     }
-    private void SpeedUp()
+    private void SpeedUp(float value)
     {
-        _movingSpeed *= 2;
+        _movingSpeed += _speedBonus;
     }
     // Update is called once per frame
     void Update()
