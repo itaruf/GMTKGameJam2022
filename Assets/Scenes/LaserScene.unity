@@ -571,7 +571,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8149558182566134508, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_Name
-      value: Chrono
+      value: Question
       objectReference: {fileID: 0}
     - target: {fileID: 8149558182566134509, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -625,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8149558183011214533, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8149558183011214534, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_Pivot.x
@@ -790,8 +790,8 @@ MonoBehaviour:
   startTimer: 1
   gameTimer: 10
   endTimer: 3
-  _chronoText: {fileID: 1509219013}
-  _text: {fileID: 1054965820}
+  _chronoText: {fileID: 1054965820}
+  _text: {fileID: 1509219013}
 --- !u!1001 &1509219012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8149558182566134508, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_Name
-      value: Question
+      value: Chrono
       objectReference: {fileID: 0}
     - target: {fileID: 8149558182566134510, guid: bf3006f4f3e91eb46a10cf96fc87f02c, type: 3}
       propertyPath: m_Materials.Array.data[0]
