@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] InputActionReference _move = null;
     [SerializeField] InputActionReference _jump = null;
     [SerializeField] InputActionReference _rolldice = null;
-
+    [SerializeField] InputActionReference _kick = null;
     // Movement
     [Header("Movement")]
     [SerializeField] float _ms = 2;
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     public bool _isJumping = false;
     public bool _canRollDice = false;
-
+    public bool _isKicking = false;
     public Vector2 Direction { get; private set; }
     public void PrepareDirection(Vector2 v) => Direction = v.normalized;
     Coroutine MovementTracking { get; set; }
@@ -56,6 +56,9 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed += JumpInput;
         _jump.action.canceled += JumpCanceled;
 
+        _kick.action.performed += KickInput;
+        _kick.action.canceled += KickCanceled;
+        
         Event.current._onCollectLava += IncreaseMS;
         /*_rolldice.action.started += RollDiceInput;*/
     }
@@ -91,7 +94,23 @@ public class PlayerController : MonoBehaviour
         _isJumping = true;
         _rb.AddForce((Vector2.up * _jumpForce), ForceMode2D.Impulse);
     }
+    
+    private void KickCanceled(InputAction.CallbackContext obj)
+    {
+        
+    }
+    
+    private void KickInput(InputAction.CallbackContext obj)
 
+    {   
+        // _animatorController._animator.Play("ThrowDice");
+        Event.current.Kick();
+    }
+
+    public void Endkick()
+    {
+        _isKicking = false;
+    }
     private void OnDestroy()
     {
         _move.action.started -= MoveInput;
@@ -101,6 +120,9 @@ public class PlayerController : MonoBehaviour
         _jump.action.performed -= MoveCanceled;
 
         _rolldice.action.started -= RollDiceInput;
+        
+        _kick.action.performed -= KickInput;
+        _kick.action.canceled -= KickCanceled;
     }
 
     void FixedUpdate()
