@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceShard : MonoBehaviour
 {
-    [SerializeField] static float _movingSpeed = 6f;
+    [SerializeField] float _movingSpeed = 6f;
     [SerializeField] float _speedBonus = 1f;
 
     [SerializeField] private float _delayBeforeLaunch = 1.0f;

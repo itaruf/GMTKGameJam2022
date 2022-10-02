@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private static float _movingSpeed = 2.0f;
+    [SerializeField] private float _movingSpeed = 2.0f;
     [SerializeField] float _speedBonus = 0.1f;
     [SerializeField] private float _xPositionLowerBound;
     [SerializeField] private float _xPositionUpperBound;
